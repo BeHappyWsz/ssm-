@@ -13,5 +13,19 @@
 
 		<!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		
 	</settings>
+	
+	<!-- 扫描entity包 使用别名 -->
+	<typeAliases>
+		<package name="domain"/>
+	</typeAliases>
+	
+	<!-- 扫描sql配置文件:mapper需要的xml文件 -->
+	<mappers>
+	   	<!-- 如果使用package那么dao与xml必须在同一个文件夹下,否则出错;也可单个mapper -->
+		<!-- <package name="dao.mapper"/>-->
+		<mapper resource="dao/mapper/UserDao.xml"/>
+	</mappers>
+	
 </configuration>

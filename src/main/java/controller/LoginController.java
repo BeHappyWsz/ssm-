@@ -6,10 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import common.Result;
+import service.UserService;
 /**
  * 登录控制
  * @author wsz
@@ -18,6 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
+	@Autowired
+	private UserService userService;
+	
 	/**
 	 * 登录操作
 	 * @param request
@@ -32,7 +39,8 @@ public class LoginController {
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response,String username,String password) throws ServletException, IOException {
 		ModelAndView model = new ModelAndView();
-		if("1".equals(username) || "1".equals(password)) {
+		Result login = userService.login(username,password);
+		if(login.getSuccess()) {
 			//登录成功
 			request.getSession().setAttribute("username", username);
 			model.setViewName("redirect:index");//重定向:浏览器url改变
