@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import domain.User;
@@ -27,4 +28,12 @@ public interface UserDao {
 	List<User> getAllUsers();	
 	
 	List<User> getUserByRealname(String realname);
+	
+	/**
+	 * 使用RowBounds进行分页
+	 * @param realname
+	 * @param rb
+	 * @return
+	 */
+	List<User> getUserByRealname(String realname,RowBounds rb);
 }

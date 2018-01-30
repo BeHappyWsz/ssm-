@@ -27,4 +27,11 @@
   		from t_user
   		where username = #{username} and password = #{password}
   	</select>
+  	
+  	<select id="getUserByRealname" resultType="domain.User" parameterType="String">
+  		select <include refid="baseColumn"/>
+  		from t_user
+  		where real_name like concat('%',#{realname},'%')
+  	</select>
+  	
 </mapper>

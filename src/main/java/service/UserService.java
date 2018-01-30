@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,13 @@ public class UserService extends BaseService{
 		return new Result(true,"登录成功");
 	}
 	
-	
+	/**
+	 * 使用RowBounds模拟分页
+	 * @return
+	 */
+	public Result getPage() {
+		List<User> list = userDao.getUserByRealname("1", new RowBounds(2, 4));
+		return new Result(true,"",list);
+	}
 	
 }
