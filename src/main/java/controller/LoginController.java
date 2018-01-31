@@ -1,12 +1,15 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +25,8 @@ import service.UserService;
 @Controller
 public class LoginController {
 
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	private UserService userService;
 	
@@ -67,4 +72,14 @@ public class LoginController {
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
+	/**
+	 *  π”√JdbcTemplate
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("template")
+	public Result template(){
+		List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from  t_user");
+		return new Result(true,"",list);
+	}
 }
