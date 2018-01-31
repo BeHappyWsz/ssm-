@@ -58,6 +58,7 @@
 	</bean>
 	
 	<!-- 5.扫描web相关的bean 注入的加载顺序dao-service-controller,否则出现注入失败 -->
+	<context:component-scan base-package="aop"/>
 	<context:component-scan base-package="service"/>
 	<context:component-scan base-package="controller" />
 </beans>
